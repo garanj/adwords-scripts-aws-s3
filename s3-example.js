@@ -8,8 +8,8 @@
 
 function s3example() {
   var s3 = new S3(
-      'us-east-2', 'AK..................',
-      'BEz2+/Ar................................');
+      'INSERT_REGION', 'INSERT_ACCESS_KEY',
+      'INSERT_ACCESS_SECRET');
   var response =
       s3.fetch('https://s3.us-east-2.amazonaws.com/example_bucket/test.csv');
 
