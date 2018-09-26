@@ -7,16 +7,28 @@
  */
 
 function s3example() {
+  // Basic example, grabbing a CSV file from Amazon and writing to a Google Sheet
+  
+  // Input CSV URL on Amazon S3
+  var inputCsvUrl = 'https://s3.us-east-2.amazonaws.com/example_bucket/test.csv';
+  
+  // Output spreadsheet in Google Sheets, for ingestion by other Google Apps and services.
+  var outputSpreadsheetUrl ='https://docs.google.com/spreadsheets/d/...../edit';
+  
+  // Create S3 client, using credentials.
   var s3 = new S3(
-      'INSERT_REGION', 'INSERT_ACCESS_KEY',
-      'INSERT_ACCESS_SECRET');
-  var response =
-      s3.fetch('https://s3.us-east-2.amazonaws.com/example_bucket/test.csv');
+      'us-east-2', 'AKIAI2EA5TCTXVP6PG3Q',
+      'gs+TCMuAa+SRu1oQG+Q0kXhCnxghjG51HJ65L99f');
+  var response = s3.fetch(inputCsvUrl);
 
   if (response.getResponseCode() === 200) {
-    // ... Do something with successful response
+    var csv = Utilities.parseCsv(response.getContentText());
+    var ss = SpreadsheetApp.openByUrl(outputSpreadsheetUrl);
+    var s = ss.getActiveSheet();
+    s.getRange(1, 1, csv.length, csv[0].length).setValues(csv);
   } else {
     // ... Do something with error
+    Logger.log(response);
   }
 }
 
