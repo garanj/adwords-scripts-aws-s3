@@ -17,8 +17,8 @@ function s3example() {
   
   // Create S3 client, using credentials.
   var s3 = new S3(
-      'us-east-2', 'AKIAI2EA5TCTXVP6PG3Q',
-      'gs+TCMuAa+SRu1oQG+Q0kXhCnxghjG51HJ65L99f');
+      'us-east-2', 'ACCESS_KEY_ID',
+      'ACCESS_SECRET');
   var response = s3.fetch(inputCsvUrl);
 
   if (response.getResponseCode() === 200) {
